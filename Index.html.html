@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&J Texas Lone Star AutoDiag — Vehicle Inspection Report</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f3ef;
+  --white: #ffffff;
+  --border: #e0dbd2;
+  --dark: #1a1a1a;
+  --mid: #4a4a4a;
+  --muted: #8a8680;
+  --accent: #c47b2b;
+  --accent-light: #f5e8d6;
+  --green: #2d7a4f;
+  --green-light: #e6f4ec;
+  --red: #b84040;
+  --red-light: #faeaea;
+  --amber: #b87020;
+  --amber-light: #fdf0dd;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'DM Sans', sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--dark);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.7;
+  min-height: 100vh;
+  padding: 0 0 60px;
+}
+
+/* HEADER */
+.header {
+  background: var(--dark);
+  padding: 28px 32px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #e8a040, var(--accent));
+}
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.brand {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: #fff;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.brand span {
+  color: var(--accent);
+}
+.brand-sub {
+  font-size: 11px;
+  color: #888;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 5px;
+  font-weight: 300;
+}
+.report-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 2px;
+  align-self: flex-start;
+}
+
+/* VEHICLE CARD */
+.vehicle-card {
+  background: var(--white);
+  margin: 28px 28px 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.vehicle-header {
+  background: var(--dark);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.vehicle-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: #fff;
+}
+.vehicle-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.vmeta-tag {
+  background: rgba(255,255,255,0.1);
+  color: #ccc;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+}
+.vehicle-body {
+  padding: 20px 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+.vfield label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: block;
+  margin-bottom: 3px;
+}
+.vfield span {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+/* SECTION WRAPPER */
+.content { padding: 0 28px; }
+
+/* SECTION TITLE */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 28px 0 14px;
+}
+.section-label .line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.section-label span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* STATUS CARD */
+.status-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.status-card-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+.status-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.icon-green { background: var(--green-light); }
+.icon-amber { background: var(--amber-light); }
+.icon-red   { background: var(--red-light); }
+
+.status-card-title {
+  flex: 1;
+}
+.status-card-title h3 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.3;
+}
+.status-card-title p {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 1px;
+}
+.status-pill {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+.pill-green  { background: var(--green-light);  color: var(--green); }
+.pill-amber  { background: var(--amber-light);  color: var(--amber); }
+.pill-red    { background: var(--red-light);    color: var(--red); }
+
+.status-card-body {
+  padding: 16px 20px;
+}
+.status-card-body p {
+  font-size: 14px;
+  color: var(--mid);
+  line-height: 1.7;
+}
+.status-card-body p + p { margin-top: 10px; }
+
+/* CODE BADGE */
+.code-badge {
+  display: inline-block;
+  background: var(--dark);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+  font-family: monospace;
+  margin: 0 2px;
+}
+
+/* PARTS LIST */
+.parts-list {
+  margin-top: 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.parts-list-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.part-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 13.5px;
+  color: var(--mid);
+  border-bottom: 1px dashed var(--border);
+}
+.part-item:last-child { border-bottom: none; }
+.part-check {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--green-light);
+  color: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+
+/* SUMMARY BOX */
+.summary-box {
+  background: var(--dark);
+  border-radius: 10px;
+  padding: 24px;
+  margin-top: 6px;
+  position: relative;
+  overflow: hidden;
+}
+.summary-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #e8a040);
+}
+.summary-box h3 {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.summary-box p {
+  font-size: 14px;
+  color: #aaa;
+  line-height: 1.8;
+}
+.summary-box p strong { color: #fff; }
+.summary-box .next-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+.next-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  font-size: 13.5px;
+  color: #ccc;
+}
+.next-num {
+  background: rgba(196,123,43,0.25);
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* FOOTER */
+.footer {
+  margin: 28px 28px 0;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.footer strong { color: var(--dark); }
+
+/* PRINT */
+@media print {
+  body { background: #fff; }
+  .vehicle-card, .status-card { box-shadow: none; }
+}
+
+@media (max-width: 600px) {
+  .header { padding: 20px 18px 18px; }
+  .vehicle-card, .content { margin-left: 16px; margin-right: 16px; }
+  .content { padding: 0 16px; }
+  .footer { margin: 28px 16px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand">J&amp;J Texas Lone Star <span>AutoDiag</span></div>
+      <div class="brand-sub">Vehicle Inspection Report</div>
+    </div>
+    <div class="report-badge">Customer Copy</div>
+  </div>
+</div>
+
+<!-- VEHICLE INFO -->
+<div class="vehicle-card">
+  <div class="vehicle-header">
+    <div class="vehicle-name">2013 Ford Escape</div>
+    <div class="vehicle-meta">
+      <span class="vmeta-tag">1.6L EcoBoost</span>
+      <span class="vmeta-tag">4-Cylinder Turbo</span>
+    </div>
+  </div>
+  <div class="vehicle-body">
+    <div class="vfield">
+      <label>Date</label>
+      <span id="report-date">—</span>
+    </div>
+    <div class="vfield">
+      <label>Engine</label>
+      <span>1.6L EcoBoost</span>
+    </div>
+    <div class="vfield">
+      <label>Codes Found</label>
+      <span>P2560 · P130D</span>
+    </div>
+    <div class="vfield">
+      <label>Report By</label>
+      <span>Jorge Vasquez</span>
+    </div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- CODES FOUND -->
+  <div class="section-label">
+    <div class="line"></div>
+    <span>Diagnostic Codes Found</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- P2560 -->
+  <div class="status-card">
+    <div class="status-card-header">
+      <div class="status-icon icon-green">✓</div>
+      <div class="status-card-title">
+        <h3>Code P2560 — Engine Coolant Level Low</h3>
+        <p>Cooling System</p>
+      </div>
+      <span class="status-pill pill-green">Repaired</span>
+    </div>
+    <div class="status-card-body">
+      <p>This code was set because the vehicle's coolant level was low due to an active leak in the cooling system. Low coolant can cause the engine to run hotter than normal, which triggers this warning and puts the vehicle into a protective mode to prevent engine damage.</p>
+      <p>The source of the leak was identified and repaired. The cooling system is now operating correctly and holding proper coolant level.</p>
+      <div class="parts-list">
+        <div class="parts-list-label">Parts Replaced</div>
+        <div class="part-item">
+          <div class="part-check">✓</div>
+          Lower Radiator Hose
+        </div>
+        <div class="part-item">
+          <div class="part-check">✓</div>
+          Water Control Valve
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- P130D -->
+  <div class="status-card">
+    <div class="status-card-header">
+      <div class="status-icon icon-amber">⚠</div>
+      <div class="status-card-title">
+        <h3>Code P130D — Engine Knock Detected</h3>
+        <p>Engine / Combustion</p>
+      </div>
+      <span class="status-pill pill-amber">Pending Repair</span>
+    </div>
+    <div class="status-card-body">
+      <p>This code means the engine's computer detected abnormal combustion — commonly referred to as "knock" or "pre-ignition" — in one of the engine cylinders. When this happens, the computer tries to compensate to protect the engine, but in this case it reached its limit and stored a fault code.</p>
+      <p>Through diagnostic testing, the root cause was identified as <strong>carbon buildup on the intake valves</strong> inside the engine. This is a known and common condition on this engine type. Over time, oily deposits accumulate on the intake valves and create hot spots that cause the fuel-air mixture to ignite at the wrong moment.</p>
+      <p>This condition is <strong>separate from the coolant leak</strong> and requires its own service to fully resolve. It is not an emergency, but it should be addressed to restore full engine performance and prevent the check engine light from returning.</p>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="section-label">
+    <div class="line"></div>
+    <span>Summary &amp; Recommended Service</span>
+    <div class="line"></div>
+  </div>
+
+  <div class="summary-box">
+    <h3>What We Found &amp; What's Next</h3>
+    <p>Your 2013 Ford Escape came in with two diagnostic codes. The <strong>coolant leak has been fully repaired</strong> — the lower radiator hose and water control valve were replaced, and the cooling system is now in good working order.</p>
+    <p>The remaining code, related to engine knock, was thoroughly diagnosed and traced to <strong>carbon deposits on the intake valves</strong> — specifically most active in Cylinder 2. This is a maintenance issue, not a breakdown risk, but it does affect performance and will keep the check engine light on until corrected.</p>
+    <div class="next-label">Recommended Next Service</div>
+    <div class="next-item">
+      <div class="next-num">1</div>
+      <span><strong style="color:#fff;">Intake Valve Carbon Cleaning</strong> — A professional cleaning procedure to remove carbon deposits from the engine's intake valves and restore normal combustion.</span>
+    </div>
+    <div class="next-item">
+      <div class="next-num">2</div>
+      <span><strong style="color:#fff;">Spark Plug Inspection</strong> — Inspect and replace spark plugs as needed, particularly Cylinder 2, to ensure clean ignition after the cleaning service.</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; This report is provided for your records. &nbsp;·&nbsp; Questions? Contact us before authorizing any additional repairs.
+</div>
+
+<script>
+  // Auto-fill today's date
+  const d = new Date();
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('report-date').textContent = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+</script>
+
+</body>
+</html>
