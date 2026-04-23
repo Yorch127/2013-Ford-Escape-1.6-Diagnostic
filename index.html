@@ -67,8 +67,6 @@ body {
   margin-top: 5px;
   font-weight: 300;
 }
-
-/* ── PRINT BUTTON IN HEADER ── */
 .print-btn {
   background: var(--accent);
   color: #fff;
@@ -109,10 +107,7 @@ body {
   bottom: -1px;
 }
 .tab-btn:hover { background: rgba(255,255,255,0.12); color: #ddd; }
-.tab-btn.active {
-  background: var(--bg);
-  color: var(--dark);
-}
+.tab-btn.active { background: var(--bg); color: var(--dark); }
 .tab-btn.active::after {
   content: '';
   position: absolute;
@@ -143,12 +138,8 @@ body {
   flex-wrap: wrap;
   gap: 10px;
 }
-.vehicle-name {
-  font-family: var(--serif);
-  font-size: 22px;
-  color: #fff;
-}
-.vehicle-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.vehicle-name { font-family: var(--serif); font-size: 22px; color: #fff; }
+.vehicle-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .vmeta-tag {
   background: rgba(255,255,255,0.1);
   color: #ccc;
@@ -172,13 +163,9 @@ body {
   display: block;
   margin-bottom: 3px;
 }
-.vfield span {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--dark);
-}
+.vfield span { font-size: 14px; font-weight: 500; color: var(--dark); }
 
-/* ── CONTENT WRAPPER ── */
+/* ── CONTENT ── */
 .content { padding: 0 28px; }
 
 /* ── SECTION LABEL ── */
@@ -198,7 +185,7 @@ body {
   white-space: nowrap;
 }
 
-/* ── STATUS CARDS (Diag) ── */
+/* ── STATUS CARDS ── */
 .status-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -215,14 +202,12 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .status-icon {
-  width: 36px; height: 36px;
-  border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 16px; flex-shrink: 0;
 }
 .icon-green { background: var(--green-light); }
 .icon-amber { background: var(--amber-light); }
-.icon-red   { background: var(--red-light); }
 .status-card-title { flex: 1; }
 .status-card-title h3 { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.3; }
 .status-card-title p { font-size: 12px; color: var(--muted); margin-top: 1px; }
@@ -232,7 +217,6 @@ body {
 }
 .pill-green { background: var(--green-light); color: var(--green); }
 .pill-amber { background: var(--amber-light); color: var(--amber); }
-.pill-red   { background: var(--red-light);   color: var(--red); }
 .status-card-body { padding: 16px 20px; }
 .status-card-body p { font-size: 14px; color: var(--mid); line-height: 1.7; }
 .status-card-body p + p { margin-top: 10px; }
@@ -292,38 +276,7 @@ body {
   flex-shrink: 0; margin-top: 1px;
 }
 
-/* ── INVOICE SPECIFIC ── */
-.inv-vehicle-card {
-  background: var(--white);
-  margin: 28px 28px 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-.inv-vehicle-header {
-  background: var(--dark);
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-.inv-meta-grid {
-  padding: 20px 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
-}
-.inv-status-chip {
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
-}
-.chip-due   { background: var(--red-light);   color: var(--red); }
-.chip-paid  { background: var(--green-light);  color: var(--green); }
-
-/* info rows */
+/* ── INVOICE INFO GRID ── */
 .inv-info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -344,11 +297,11 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .irow { display: flex; gap: 8px; margin-bottom: 7px; font-size: 13.5px; }
-.irow .ik { color: var(--muted); min-width: 82px; flex-shrink: 0; font-size: 12px; padding-top: 1px; }
+.irow .ik { color: var(--muted); min-width: 88px; flex-shrink: 0; font-size: 12px; padding-top: 1px; }
 .irow .iv { font-weight: 500; color: var(--dark); }
 .irow .iv.blank { color: var(--border); font-style: italic; font-weight: 400; }
 
-/* line items table */
+/* ── LINE ITEMS ── */
 .items-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -374,7 +327,7 @@ table.items tbody td { padding: 12px 20px; font-size: 14px; }
 table.items tbody td:not(:first-child) { text-align: right; font-size: 13.5px; }
 table.items tbody td.desc { font-weight: 500; }
 
-/* totals */
+/* ── TOTALS ── */
 .totals-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -396,7 +349,7 @@ table.items tbody td.desc { font-weight: 500; }
 .t-row:last-child .tk { color: #888; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
 .t-row:last-child .tv { color: var(--accent); font-size: 18px; font-weight: 600; }
 
-/* notes / payment */
+/* ── NOTES / PAYMENT ── */
 .bottom-grid {
   display: grid; grid-template-columns: 1fr 1fr;
   gap: 14px; margin-bottom: 4px;
@@ -421,7 +374,15 @@ table.items tbody td.desc { font-weight: 500; }
   border: 1px solid var(--border); color: var(--dark);
 }
 
-/* ── SHARED FOOTER ── */
+/* ── STATUS CHIP ── */
+.inv-status-chip {
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+}
+.chip-due { background: var(--red-light); color: var(--red); }
+.chip-paid { background: var(--green-light); color: var(--green); }
+
+/* ── FOOTER ── */
 .footer {
   margin: 28px 28px 0;
   text-align: center;
@@ -435,19 +396,17 @@ table.items tbody td.desc { font-weight: 500; }
 /* ── PRINT ── */
 @media print {
   body { background: #fff; }
-  .tab-nav { display: none; }
+  .tab-nav, .print-btn { display: none; }
   .tab-panel { display: block !important; }
-  .print-btn { display: none; }
+  #panel-invoice { page-break-before: always; }
   .vehicle-card, .status-card, .items-card,
   .totals-card, .bottom-card, .inv-info-card { box-shadow: none; }
-  /* page break between sections */
-  #panel-invoice { page-break-before: always; }
 }
 
 /* ── MOBILE ── */
 @media (max-width: 600px) {
   .header { padding: 20px 18px 0; }
-  .vehicle-card, .inv-vehicle-card, .content { margin-left: 14px; margin-right: 14px; }
+  .vehicle-card, .content { margin-left: 14px; margin-right: 14px; }
   .content { padding: 0; }
   .inv-info-grid, .bottom-grid { grid-template-columns: 1fr; }
   table.items thead th,
@@ -468,8 +427,6 @@ table.items tbody td.desc { font-weight: 500; }
     </div>
     <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
   </div>
-
-  <!-- TABS -->
   <div class="tab-nav">
     <button class="tab-btn active" onclick="switchTab('diag', this)">🔍 Diagnostic Report</button>
     <button class="tab-btn" onclick="switchTab('invoice', this)">🧾 Invoice</button>
@@ -482,7 +439,6 @@ table.items tbody td.desc { font-weight: 500; }
 ══════════════════════════════════════ -->
 <div class="tab-panel active" id="panel-diag">
 
-  <!-- VEHICLE INFO -->
   <div class="vehicle-card">
     <div class="vehicle-header">
       <div class="vehicle-name">2013 Ford Escape</div>
@@ -520,8 +476,9 @@ table.items tbody td.desc { font-weight: 500; }
         <p>The source of the leak was identified and repaired. The cooling system is now operating correctly and holding proper coolant level.</p>
         <div class="parts-list">
           <div class="parts-list-label">Parts Replaced</div>
-          <div class="part-item"><div class="part-check">✓</div>Lower Radiator Hose</div>
+          <div class="part-item"><div class="part-check">✓</div>Lower Coolant Hose</div>
           <div class="part-item"><div class="part-check">✓</div>Water Control Valve</div>
+          <div class="part-item"><div class="part-check">✓</div>Coolant (2 units)</div>
         </div>
       </div>
     </div>
@@ -549,7 +506,7 @@ table.items tbody td.desc { font-weight: 500; }
 
     <div class="summary-box">
       <h3>What We Found &amp; What's Next</h3>
-      <p>Your 2013 Ford Escape came in with two diagnostic codes. The <strong>coolant leak has been fully repaired</strong> — the lower radiator hose and water control valve were replaced, and the cooling system is now in good working order.</p>
+      <p>Your 2013 Ford Escape came in with two diagnostic codes. The <strong>coolant leak has been fully repaired</strong> — the lower coolant hose, water control valve, and coolant were replaced, and the cooling system is now in good working order.</p>
       <p>The remaining code, related to engine knock, was thoroughly diagnosed and traced to <strong>carbon deposits on the intake valves</strong> — specifically most active in Cylinder 2. This is a maintenance issue, not a breakdown risk, but it does affect performance and will keep the check engine light on until corrected.</p>
       <div class="next-label">Recommended Next Service</div>
       <div class="next-item">
@@ -562,7 +519,7 @@ table.items tbody td.desc { font-weight: 500; }
       </div>
     </div>
 
-  </div><!-- /content -->
+  </div>
 
   <div class="footer">
     <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; This report is provided for your records. &nbsp;·&nbsp; Questions? Contact us before authorizing any additional repairs.
@@ -576,9 +533,8 @@ table.items tbody td.desc { font-weight: 500; }
 ══════════════════════════════════════ -->
 <div class="tab-panel" id="panel-invoice">
 
-  <!-- VEHICLE / INVOICE HEADER CARD -->
-  <div class="inv-vehicle-card">
-    <div class="inv-vehicle-header">
+  <div class="vehicle-card">
+    <div class="vehicle-header">
       <div class="vehicle-name">2013 Ford Escape</div>
       <div class="vehicle-meta">
         <span class="vmeta-tag">1.6L EcoBoost</span>
@@ -586,9 +542,9 @@ table.items tbody td.desc { font-weight: 500; }
         <span class="inv-status-chip chip-due">Payment Due</span>
       </div>
     </div>
-    <div class="inv-meta-grid">
+    <div class="vehicle-body">
       <div class="vfield"><label>Invoice #</label><span>JJ-2026-0042</span></div>
-      <div class="vfield"><label>Invoice Date</label><span>April 23, 2026</span></div>
+      <div class="vfield"><label>Date</label><span>April 23, 2026</span></div>
       <div class="vfield"><label>VIN</label><span>1FMCU0GX7DUC61348</span></div>
       <div class="vfield"><label>Serviced By</label><span>Jorge Vasquez</span></div>
     </div>
@@ -596,7 +552,6 @@ table.items tbody td.desc { font-weight: 500; }
 
   <div class="content">
 
-    <!-- CUSTOMER & VEHICLE INFO -->
     <div class="section-label">
       <div class="line"></div><span>Customer &amp; Vehicle Details</span><div class="line"></div>
     </div>
@@ -610,15 +565,14 @@ table.items tbody td.desc { font-weight: 500; }
       </div>
       <div class="inv-info-card">
         <div class="ic-title">Vehicle Info</div>
-        <div class="irow"><span class="ik">Year / Make</span><span class="iv">2013 Ford Escape</span></div>
-        <div class="irow"><span class="ik">Engine</span><span class="iv">1.6L EcoBoost</span></div>
-        <div class="irow"><span class="ik">Plate</span><span class="iv blank">—</span></div>
-        <div class="irow"><span class="ik">Mileage In</span><span class="iv blank">—</span></div>
-        <div class="irow"><span class="ik">Mileage Out</span><span class="iv blank">—</span></div>
+        <div class="irow"><span class="ik">Year / Make</span><span class="iv">2013 Ford Escape 1.6L</span></div>
+        <div class="irow"><span class="ik">VIN</span><span class="iv">1FMCU0GX7DUC61348</span></div>
+        <div class="irow"><span class="ik">License Plate</span><span class="iv blank">—</span></div>
+        <div class="irow"><span class="ik">Mileage In</span><span class="iv">00,000 mi</span></div>
+        <div class="irow"><span class="ik">Mileage Out</span><span class="iv">00,000 mi</span></div>
       </div>
     </div>
 
-    <!-- LINE ITEMS -->
     <div class="section-label">
       <div class="line"></div><span>Services &amp; Parts</span><div class="line"></div>
     </div>
@@ -639,11 +593,11 @@ table.items tbody td.desc { font-weight: 500; }
           </tr>
           <tr>
             <td class="desc">Lower Coolant Hose</td>
-            <td>1</td><td>$167.78</td><td>$457.59</td>
+            <td>1</td><td>$167.78</td><td>$167.78</td>
           </tr>
           <tr>
             <td class="desc">Coolant</td>
-            <td>2</td><td>$180.00</td><td>$180.00</td>
+            <td>2</td><td>$25.41</td><td>$50.82</td>
           </tr>
           <tr class="spacer"><td colspan="4"></td></tr>
           <tr class="labor-row">
@@ -654,14 +608,12 @@ table.items tbody td.desc { font-weight: 500; }
       </table>
     </div>
 
-    <!-- TOTALS -->
     <div class="totals-card">
-      <div class="t-row"><span class="tk">Subtotal</span><span class="tv">$443.00</span></div>
-      <div class="t-row"><span class="tk">Tax (6.25%)</span><span class="tv">$27.69</span></div>
-      <div class="t-row"><span class="tk">Total Amount Due</span><span class="tv">$470.69</span></div>
+      <div class="t-row"><span class="tk">Subtotal</span><span class="tv">$519.23</span></div>
+      <div class="t-row"><span class="tk">Tax (6.25%)</span><span class="tv">$32.45</span></div>
+      <div class="t-row"><span class="tk">Total Amount Due</span><span class="tv">$551.68</span></div>
     </div>
 
-    <!-- NOTES / PAYMENT -->
     <div class="section-label">
       <div class="line"></div><span>Notes &amp; Payment</span><div class="line"></div>
     </div>
@@ -674,14 +626,14 @@ table.items tbody td.desc { font-weight: 500; }
         <div class="bc-title">Payment Methods</div>
         <div class="payment-pills">
           <span class="pay-pill">💵 Cash</span>
-          <span class="pay-pill">💳 Credit / Debit</span>
+          <span class="pay-pill">💳 Credit / Debit Card</span>
         </div>
         <p>Questions about this invoice?</p>
         <div class="contact-val">(832) 807-0449</div>
       </div>
     </div>
 
-  </div><!-- /content -->
+  </div>
 
   <div class="footer">
     <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; 10107 Crammond St, Houston TX 77064 &nbsp;·&nbsp; (832) 807-0449 &nbsp;·&nbsp; jjtexaslonestar.com
@@ -691,12 +643,10 @@ table.items tbody td.desc { font-weight: 500; }
 
 
 <script>
-  // Auto date
   const d = new Date();
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   document.getElementById('report-date').textContent = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
 
-  // Tab switching
   function switchTab(tab, btn) {
     document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
