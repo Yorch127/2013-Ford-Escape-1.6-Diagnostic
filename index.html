@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>J&J Texas Lone Star — Report &amp; Invoice</title>
+<title>J&J Texas Lone Star AutoDiag — Vehicle Inspection Report</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -25,634 +26,697 @@
   --sans: 'DM Sans', sans-serif;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+- { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: var(--bg);
-  color: var(--dark);
-  font-family: var(--sans);
-  font-size: 15px;
-  line-height: 1.7;
-  min-height: 100vh;
-  padding: 0 0 60px;
+background: var(–bg);
+color: var(–dark);
+font-family: var(–sans);
+font-size: 15px;
+line-height: 1.7;
+min-height: 100vh;
+padding: 0 0 60px;
 }
 
-/* ── HEADER ── */
+/* HEADER */
 .header {
-  background: var(--dark);
-  padding: 28px 32px 0;
-  position: relative;
+background: var(–dark);
+padding: 28px 32px 24px;
+position: relative;
+overflow: hidden;
+}
+.header::after {
+content: ‘’;
+position: absolute;
+bottom: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(–accent), #e8a040, var(–accent));
 }
 .header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-  padding-bottom: 20px;
+display: flex;
+align-items: flex-start;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 16px;
 }
 .brand {
-  font-family: var(--serif);
-  font-size: 26px;
-  color: #fff;
-  letter-spacing: 0.5px;
-  line-height: 1;
+font-family: var(–serif);
+font-size: 26px;
+color: #fff;
+letter-spacing: 0.5px;
+line-height: 1;
 }
-.brand span { color: var(--accent); }
+.brand span {
+color: var(–accent);
+}
 .brand-sub {
-  font-size: 11px;
-  color: #888;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin-top: 5px;
-  font-weight: 300;
+font-size: 11px;
+color: #888;
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-top: 5px;
+font-weight: 300;
 }
-.print-btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 7px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  align-self: flex-start;
-  transition: background .15s;
-}
-.print-btn:hover { background: #d88c35; }
-
-/* ── TABS ── */
-.tab-nav {
-  display: flex;
-  gap: 4px;
-  padding-top: 4px;
-}
-.tab-btn {
-  background: rgba(255,255,255,0.07);
-  color: #aaa;
-  border: none;
-  font-family: var(--sans);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 10px 22px;
-  border-radius: 6px 6px 0 0;
-  cursor: pointer;
-  transition: background .15s, color .15s;
-  position: relative;
-  bottom: -1px;
-}
-.tab-btn:hover { background: rgba(255,255,255,0.12); color: #ddd; }
-.tab-btn.active { background: var(--bg); color: var(--dark); }
-.tab-btn.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--accent);
+.report-badge {
+background: var(–accent);
+color: #fff;
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+padding: 5px 12px;
+border-radius: 2px;
+align-self: flex-start;
 }
 
-/* ── TAB PANELS ── */
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
-
-/* ── VEHICLE CARD ── */
+/* VEHICLE CARD */
 .vehicle-card {
-  background: var(--white);
-  margin: 28px 28px 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+background: var(–white);
+margin: 28px 28px 0;
+border-radius: 10px;
+border: 1px solid var(–border);
+overflow: hidden;
+box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .vehicle-header {
-  background: var(--dark);
-  padding: 18px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
+background: var(–dark);
+padding: 18px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
 }
-.vehicle-name { font-family: var(--serif); font-size: 22px; color: #fff; }
-.vehicle-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.vehicle-name {
+font-family: var(–serif);
+font-size: 22px;
+color: #fff;
+}
+.vehicle-meta {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+}
 .vmeta-tag {
-  background: rgba(255,255,255,0.1);
-  color: #ccc;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.5px;
+background: rgba(255,255,255,0.1);
+color: #ccc;
+font-size: 11px;
+padding: 4px 10px;
+border-radius: 20px;
+letter-spacing: 0.5px;
 }
 .vehicle-body {
-  padding: 20px 24px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 16px;
+padding: 20px 24px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+gap: 16px;
 }
 .vfield label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: block;
-  margin-bottom: 3px;
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–muted);
+display: block;
+margin-bottom: 3px;
 }
-.vfield span { font-size: 14px; font-weight: 500; color: var(--dark); }
+.vfield span {
+font-size: 14px;
+font-weight: 500;
+color: var(–dark);
+}
 
-/* ── CONTENT ── */
+/* SECTION WRAPPER */
 .content { padding: 0 28px; }
 
-/* ── SECTION LABEL ── */
+/* SECTION TITLE */
 .section-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 28px 0 14px;
+display: flex;
+align-items: center;
+gap: 12px;
+margin: 28px 0 14px;
 }
-.section-label .line { flex: 1; height: 1px; background: var(--border); }
+.section-label .line {
+flex: 1;
+height: 1px;
+background: var(–border);
+}
 .section-label span {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  white-space: nowrap;
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–muted);
+white-space: nowrap;
 }
 
-/* ── STATUS CARDS ── */
+/* STATUS CARD */
 .status-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 14px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 10px;
+overflow: hidden;
+margin-bottom: 14px;
+box-shadow: 0 1px 6px rgba(0,0,0,0.04);
 }
 .status-card-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 16px 20px;
+border-bottom: 1px solid var(–border);
 }
 .status-icon {
-  width: 36px; height: 36px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0;
+width: 36px;
+height: 36px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 16px;
+flex-shrink: 0;
 }
-.icon-green { background: var(--green-light); }
-.icon-amber { background: var(--amber-light); }
-.status-card-title { flex: 1; }
-.status-card-title h3 { font-size: 15px; font-weight: 600; color: var(--dark); line-height: 1.3; }
-.status-card-title p { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.icon-green { background: var(–green-light); }
+.icon-amber { background: var(–amber-light); }
+.icon-red   { background: var(–red-light); }
+
+.status-card-title {
+flex: 1;
+}
+.status-card-title h3 {
+font-size: 15px;
+font-weight: 600;
+color: var(–dark);
+line-height: 1.3;
+}
+.status-card-title p {
+font-size: 12px;
+color: var(–muted);
+margin-top: 1px;
+}
 .status-pill {
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; padding: 4px 12px; border-radius: 20px; flex-shrink: 0;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+padding: 4px 12px;
+border-radius: 20px;
+flex-shrink: 0;
 }
-.pill-green { background: var(--green-light); color: var(--green); }
-.pill-amber { background: var(--amber-light); color: var(--amber); }
-.status-card-body { padding: 16px 20px; }
-.status-card-body p { font-size: 14px; color: var(--mid); line-height: 1.7; }
+.pill-green  { background: var(–green-light);  color: var(–green); }
+.pill-amber  { background: var(–amber-light);  color: var(–amber); }
+.pill-red    { background: var(–red-light);    color: var(–red); }
+
+.status-card-body {
+padding: 16px 20px;
+}
+.status-card-body p {
+font-size: 14px;
+color: var(–mid);
+line-height: 1.7;
+}
 .status-card-body p + p { margin-top: 10px; }
 
-.parts-list { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 12px; }
+/* CODE BADGE */
+.code-badge {
+display: inline-block;
+background: var(–dark);
+color: var(–accent);
+font-size: 11px;
+font-weight: 700;
+padding: 2px 8px;
+border-radius: 3px;
+letter-spacing: 1px;
+font-family: monospace;
+margin: 0 2px;
+}
+
+/* PARTS LIST */
+.parts-list {
+margin-top: 12px;
+border-top: 1px solid var(–border);
+padding-top: 12px;
+}
 .parts-list-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 8px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 8px;
 }
 .part-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 6px 0; font-size: 13.5px; color: var(--mid);
-  border-bottom: 1px dashed var(--border);
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 6px 0;
+font-size: 13.5px;
+color: var(–mid);
+border-bottom: 1px dashed var(–border);
 }
 .part-item:last-child { border-bottom: none; }
 .part-check {
-  width: 18px; height: 18px; border-radius: 50%;
-  background: var(--green-light); color: var(--green);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 10px; flex-shrink: 0;
+width: 18px;
+height: 18px;
+border-radius: 50%;
+background: var(–green-light);
+color: var(–green);
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 10px;
+flex-shrink: 0;
 }
 
-/* ── SUMMARY BOX ── */
+/* SUMMARY BOX */
 .summary-box {
-  background: var(--dark);
-  border-radius: 10px;
-  padding: 24px;
-  margin-top: 6px;
-  position: relative;
-  overflow: hidden;
+background: var(–dark);
+border-radius: 10px;
+padding: 24px;
+margin-top: 6px;
+position: relative;
+overflow: hidden;
 }
 .summary-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), #e8a040);
+content: ‘’;
+position: absolute;
+top: 0; left: 0; right: 0;
+height: 3px;
+background: linear-gradient(90deg, var(–accent), #e8a040);
 }
-.summary-box h3 { font-family: var(--serif); font-size: 20px; color: #fff; margin-bottom: 12px; }
-.summary-box p { font-size: 14px; color: #aaa; line-height: 1.8; }
+.summary-box h3 {
+font-family: var(–serif);
+font-size: 20px;
+color: #fff;
+margin-bottom: 12px;
+}
+.summary-box p {
+font-size: 14px;
+color: #aaa;
+line-height: 1.8;
+}
 .summary-box p strong { color: #fff; }
 .summary-box .next-label {
-  font-size: 10px; font-weight: 700; letter-spacing: 2px;
-  text-transform: uppercase; color: var(--accent);
-  margin-top: 18px; margin-bottom: 6px;
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–accent);
+margin-top: 18px;
+margin-bottom: 6px;
 }
 .next-item {
-  display: flex; align-items: flex-start; gap: 10px;
-  padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: 13.5px; color: #ccc;
+display: flex;
+align-items: flex-start;
+gap: 10px;
+padding: 8px 0;
+border-top: 1px solid rgba(255,255,255,0.08);
+font-size: 13.5px;
+color: #ccc;
 }
 .next-num {
-  background: rgba(196,123,43,0.25); color: var(--accent);
-  font-size: 11px; font-weight: 700;
-  min-width: 22px; height: 22px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 1px;
+background: rgba(196,123,43,0.25);
+color: var(–accent);
+font-size: 11px;
+font-weight: 700;
+min-width: 22px;
+height: 22px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-shrink: 0;
+margin-top: 1px;
 }
 
-/* ── INVOICE INFO GRID ── */
-.inv-info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 4px;
-}
-.inv-info-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 20px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.inv-info-card .ic-title {
-  font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 12px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.irow { display: flex; gap: 8px; margin-bottom: 7px; font-size: 13.5px; }
-.irow .ik { color: var(--muted); min-width: 88px; flex-shrink: 0; font-size: 12px; padding-top: 1px; }
-.irow .iv { font-weight: 500; color: var(--dark); }
-.irow .iv.blank { color: var(--border); font-style: italic; font-weight: 400; }
-
-/* ── LINE ITEMS ── */
-.items-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 4px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-table.items { width: 100%; border-collapse: collapse; }
-table.items thead tr { border-bottom: 1px solid var(--border); }
-table.items thead th {
-  font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--muted);
-  padding: 12px 20px; text-align: left;
-}
-table.items thead th:not(:first-child) { text-align: right; }
-table.items tbody tr { border-bottom: 1px solid var(--border); }
-table.items tbody tr:last-child { border-bottom: none; }
-table.items tbody tr:hover { background: #faf9f7; }
-table.items tbody tr.spacer td { padding: 4px; border: none; }
-table.items tbody tr.labor-row td { color: var(--accent); font-weight: 500; }
-table.items tbody td { padding: 12px 20px; font-size: 14px; }
-table.items tbody td:not(:first-child) { text-align: right; font-size: 13.5px; }
-table.items tbody td.desc { font-weight: 500; }
-
-/* ── TOTALS ── */
-.totals-card {
-  background: var(--white);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-bottom: 4px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.t-row {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 11px 20px; border-bottom: 1px solid var(--border); font-size: 14px;
-}
-.t-row:last-child {
-  border-bottom: none; background: var(--dark);
-  padding: 15px 20px; border-radius: 0 0 10px 10px;
-}
-.t-row .tk { color: var(--muted); font-size: 13px; }
-.t-row .tv { font-weight: 600; }
-.t-row:last-child .tk { color: #888; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; }
-.t-row:last-child .tv { color: var(--accent); font-size: 18px; font-weight: 600; }
-
-/* ── NOTES / PAYMENT ── */
-.bottom-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 14px; margin-bottom: 4px;
-}
-.bottom-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-radius: 10px; padding: 18px 20px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-}
-.bottom-card .bc-title {
-  font-size: 10px; font-weight: 600; letter-spacing: 1.5px;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 10px; padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
-}
-.bottom-card p { font-size: 13.5px; color: var(--mid); line-height: 1.7; }
-.bottom-card .contact-val { font-size: 14px; font-weight: 600; color: var(--dark); margin-top: 8px; }
-.payment-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-.pay-pill {
-  font-size: 12px; font-weight: 500; padding: 5px 13px;
-  border-radius: 20px; background: var(--bg);
-  border: 1px solid var(--border); color: var(--dark);
-}
-
-/* ── STATUS CHIP ── */
-.inv-status-chip {
-  font-size: 10px; font-weight: 700; letter-spacing: 1px;
-  text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
-}
-.chip-due { background: var(--red-light); color: var(--red); }
-.chip-paid { background: var(--green-light); color: var(--green); }
-
-/* ── FOOTER ── */
+/* FOOTER */
 .footer {
-  margin: 28px 28px 0;
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
+margin: 28px 28px 0;
+text-align: center;
+font-size: 12px;
+color: var(–muted);
+padding-top: 20px;
+border-top: 1px solid var(–border);
 }
-.footer strong { color: var(--dark); }
+.footer strong { color: var(–dark); }
 
-/* ── PRINT ── */
-@media print {
-  body { background: #fff; }
-  .tab-nav, .print-btn { display: none; }
-  .tab-panel { display: block !important; }
-  #panel-invoice { page-break-before: always; }
-  .vehicle-card, .status-card, .items-card,
-  .totals-card, .bottom-card, .inv-info-card { box-shadow: none; }
+/* REPORTS TAB */
+.reports-tab-bar {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+margin-bottom: 14px;
+}
+.r-tab {
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 8px;
+padding: 10px 16px;
+cursor: pointer;
+transition: all 0.15s;
+display: flex;
+flex-direction: column;
+gap: 2px;
+min-width: 150px;
+text-align: left;
+}
+.r-tab:hover { border-color: var(–accent); box-shadow: 0 2px 8px rgba(196,123,43,0.12); }
+.r-tab.active { border-color: var(–accent); background: var(–accent-light); }
+.r-tab .r-tab-date { font-size: 12px; font-weight: 600; color: var(–accent); }
+.r-tab .r-tab-name { font-size: 13px; font-weight: 600; color: var(–dark); }
+.r-tab .r-tab-status {
+font-size: 10px;
+font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-top: 3px;
+display: flex;
+align-items: center;
+gap: 5px;
+}
+.r-tab .r-tab-status::before {
+content: ‘’;
+width: 6px; height: 6px;
+border-radius: 50%;
+flex-shrink: 0;
+}
+.status-monitoring .r-tab-status { color: var(–amber); }
+.status-monitoring .r-tab-status::before { background: var(–amber); }
+.status-clear .r-tab-status { color: var(–green); }
+.status-clear .r-tab-status::before { background: var(–green); }
+
+.report-panel { display: none; }
+.report-panel.visible { display: block; }
+
+.report-panel-card {
+background: var(–white);
+border: 1px solid var(–border);
+border-radius: 10px;
+overflow: hidden;
+box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.rpc-header {
+background: var(–dark);
+padding: 14px 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-wrap: wrap;
+gap: 10px;
+}
+.rpc-header-left { }
+.rpc-date { font-size: 13px; font-weight: 600; color: #fff; }
+.rpc-tech { font-size: 11px; color: #888; margin-top: 2px; }
+.rpc-pill {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1px;
+text-transform: uppercase;
+padding: 4px 12px;
+border-radius: 20px;
+}
+.rpc-pill-amber { background: var(–amber-light); color: var(–amber); }
+.rpc-pill-green { background: var(–green-light); color: var(–green); }
+
+.rpc-body { padding: 18px 20px; }
+
+.rpc-update {
+display: flex;
+gap: 12px;
+padding: 12px 0;
+border-bottom: 1px solid var(–border);
+align-items: flex-start;
+}
+.rpc-update:last-of-type { border-bottom: none; padding-bottom: 0; }
+.rpc-update-icon {
+width: 32px; height: 32px;
+border-radius: 50%;
+display: flex; align-items: center; justify-content: center;
+font-size: 14px;
+flex-shrink: 0;
+}
+.u-icon-green { background: var(–green-light); }
+.u-icon-amber { background: var(–amber-light); }
+.u-icon-blue  { background: #e8f4fb; }
+.rpc-update-text h4 { font-size: 14px; font-weight: 600; color: var(–dark); margin-bottom: 4px; }
+.rpc-update-text p  { font-size: 13.5px; color: var(–mid); line-height: 1.7; }
+
+.rpc-note {
+background: var(–bg);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 14px 16px;
+margin-top: 14px;
+font-size: 13.5px;
+color: var(–mid);
+line-height: 1.8;
+}
+.rpc-note-label {
+font-size: 10px;
+font-weight: 700;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–muted);
+margin-bottom: 8px;
+}
+.rpc-next {
+background: var(–amber-light);
+border: 1px solid rgba(184,112,32,0.25);
+border-radius: 6px;
+padding: 12px 16px;
+margin-top: 12px;
+font-size: 13.5px;
+color: var(–amber);
+}
+.rpc-next strong { color: var(–dark); }
+body { background: #fff; }
+.vehicle-card, .status-card { box-shadow: none; }
 }
 
-/* ── MOBILE ── */
 @media (max-width: 600px) {
-  .header { padding: 20px 18px 0; }
-  .vehicle-card, .content { margin-left: 14px; margin-right: 14px; }
-  .content { padding: 0; }
-  .inv-info-grid, .bottom-grid { grid-template-columns: 1fr; }
-  table.items thead th,
-  table.items tbody td { padding: 10px 14px; }
-  .footer { margin: 28px 14px 0; }
-  .tab-btn { font-size: 11px; padding: 8px 14px; letter-spacing: 1px; }
+.header { padding: 20px 18px 18px; }
+.vehicle-card, .content { margin-left: 16px; margin-right: 16px; }
+.content { padding: 0 16px; }
+.footer { margin: 28px 16px 0; }
 }
 </style>
+
 </head>
 <body>
 
-<!-- ══ HEADER ══ -->
+<!-- HEADER -->
+
 <div class="header">
   <div class="header-top">
     <div>
       <div class="brand">J&amp;J Texas Lone Star <span>AutoDiag</span></div>
-      <div class="brand-sub">Vehicle Inspection Report &amp; Invoice</div>
+      <div class="brand-sub">Vehicle Inspection Report</div>
     </div>
-    <button class="print-btn" onclick="window.print()">Print / Save PDF</button>
-  </div>
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('diag', this)">🔍 Diagnostic Report</button>
-    <button class="tab-btn" onclick="switchTab('invoice', this)">🧾 Invoice</button>
+    <div class="report-badge">Customer Copy</div>
   </div>
 </div>
 
+<!-- VEHICLE INFO -->
 
-<!-- ══════════════════════════════════════
-     TAB 1 — DIAGNOSTIC REPORT
-══════════════════════════════════════ -->
-<div class="tab-panel active" id="panel-diag">
-
-  <div class="vehicle-card">
-    <div class="vehicle-header">
-      <div class="vehicle-name">2013 Ford Escape</div>
-      <div class="vehicle-meta">
-        <span class="vmeta-tag">1.6L EcoBoost</span>
-        <span class="vmeta-tag">4-Cylinder Turbo</span>
-      </div>
+<div class="vehicle-card">
+  <div class="vehicle-header">
+    <div class="vehicle-name">2013 Ford Escape</div>
+    <div class="vehicle-meta">
+      <span class="vmeta-tag">1.6L EcoBoost</span>
+      <span class="vmeta-tag">4-Cylinder Turbo</span>
     </div>
-    <div class="vehicle-body">
-      <div class="vfield"><label>Date</label><span id="report-date">—</span></div>
-      <div class="vfield"><label>Engine</label><span>1.6L EcoBoost</span></div>
-      <div class="vfield"><label>Codes Found</label><span>P2560 · P130D</span></div>
-      <div class="vfield"><label>Report By</label><span>Jorge Vasquez</span></div>
+  </div>
+  <div class="vehicle-body">
+    <div class="vfield">
+      <label>Date</label>
+      <span id="report-date">—</span>
+    </div>
+    <div class="vfield">
+      <label>Engine</label>
+      <span>1.6L EcoBoost</span>
+    </div>
+    <div class="vfield">
+      <label>Codes Found</label>
+      <span>P2560 · P130D</span>
+    </div>
+    <div class="vfield">
+      <label>Report By</label>
+      <span>Jorge Vasquez</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE UPDATES -->
+
+<div class="content" style="margin-top:0; padding-top:0;">
+  <div class="section-label" style="margin-top:20px;">
+    <div class="line"></div>
+    <span>Service Updates</span>
+    <div class="line"></div>
+  </div>
+
+  <div class="reports-tab-bar">
+    <div class="r-tab status-monitoring" onclick="showReport('rp-apr23', this)">
+      <span class="r-tab-date">April 23, 2025</span>
+      <span class="r-tab-name">Drive Cycle #1</span>
+      <span class="r-tab-status">Monitoring</span>
     </div>
   </div>
 
-  <div class="content">
+  <!-- REPORT: APRIL 23 -->
 
-    <div class="section-label">
-      <div class="line"></div><span>Diagnostic Codes Found</span><div class="line"></div>
-    </div>
-
-    <!-- P2560 -->
-    <div class="status-card">
-      <div class="status-card-header">
-        <div class="status-icon icon-green">✓</div>
-        <div class="status-card-title">
-          <h3>Code P2560 — Engine Coolant Level Low</h3>
-          <p>Cooling System</p>
+  <div class="report-panel" id="rp-apr23">
+    <div class="report-panel-card">
+      <div class="rpc-header">
+        <div class="rpc-header-left">
+          <div class="rpc-date">April 23, 2025 — Drive Cycle #1</div>
+          <div class="rpc-tech">Technician: Jorge Vasquez &nbsp;·&nbsp; J&J Texas Lone Star AutoDiag</div>
         </div>
-        <span class="status-pill pill-green">Repaired</span>
+        <span class="rpc-pill rpc-pill-amber">Monitoring in Progress</span>
       </div>
-      <div class="status-card-body">
-        <p>This code was set because the vehicle's coolant level was low due to an active leak in the cooling system. Low coolant can cause the engine to run hotter than normal, which triggers this warning and puts the vehicle into a protective mode to prevent engine damage.</p>
-        <p>The source of the leak was identified and repaired. The cooling system is now operating correctly and holding proper coolant level.</p>
-        <div class="parts-list">
-          <div class="parts-list-label">Parts Replaced</div>
-          <div class="part-item"><div class="part-check">✓</div>Lower Coolant Hose</div>
-          <div class="part-item"><div class="part-check">✓</div>Water Control Valve</div>
-          <div class="part-item"><div class="part-check">✓</div>Coolant (2 units)</div>
+      <div class="rpc-body">
+
+```
+    <div class="rpc-update">
+      <div class="rpc-update-icon u-icon-green">✓</div>
+      <div class="rpc-update-text">
+        <h4>Spark Plug Secured</h4>
+        <p>Upon inspection, the Cylinder 1 spark plug was successfully re-torqued and secured. No thread repair was required.</p>
+      </div>
+    </div>
+
+    <div class="rpc-update">
+      <div class="rpc-update-icon u-icon-green">✓</div>
+      <div class="rpc-update-text">
+        <h4>Test Drive Completed — Vehicle Ran Smoothly</h4>
+        <p>The vehicle was taken out for an initial test drive to begin the monitoring process. Throughout the drive, the engine performed smoothly with no hesitation, rough running, or loss of power noted.</p>
+      </div>
+    </div>
+
+    <div class="rpc-update">
+      <div class="rpc-update-icon u-icon-amber">⚠️</div>
+      <div class="rpc-update-text">
+        <h4>Monitoring in Progress — Code Has Not Returned</h4>
+        <p>The scan tool was actively monitored throughout the entire drive. As of the completion of Drive Cycle #1, the engine knock code has not returned. The vehicle is being observed over additional drive cycles to confirm whether the code clears permanently.</p>
+      </div>
+    </div>
+
+    <div class="rpc-note">
+      <div class="rpc-note-label">Technician Note</div>
+      Drive Cycle #1 has been completed. The spark plug was re-seated and secured prior to the test drive, and the vehicle performed smoothly throughout with no drivability concerns. The scan tool was monitored actively during the entire drive and the code did not return during this cycle. A second drive cycle is scheduled for tomorrow to further confirm whether the code remains clear or requires additional service.
+    </div>
+
+    <div class="rpc-next">
+      <strong>What Happens Next:</strong> A second drive cycle will be performed tomorrow under similar conditions. If the code does not return, the vehicle may be fully clear. If it does return, the next recommended service is an intake valve cleaning procedure. We will keep you updated with any findings.
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- CODES FOUND -->
+
+  <div class="section-label">
+    <div class="line"></div>
+    <span>Diagnostic Codes Found</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- P2560 -->
+
+  <div class="status-card">
+    <div class="status-card-header">
+      <div class="status-icon icon-green">✓</div>
+      <div class="status-card-title">
+        <h3>Code P2560 — Engine Coolant Level Low</h3>
+        <p>Cooling System</p>
+      </div>
+      <span class="status-pill pill-green">Repaired</span>
+    </div>
+    <div class="status-card-body">
+      <p>This code was set because the vehicle's coolant level was low due to an active leak in the cooling system. Low coolant can cause the engine to run hotter than normal, which triggers this warning and puts the vehicle into a protective mode to prevent engine damage.</p>
+      <p>The source of the leak was identified and repaired. The cooling system is now operating correctly and holding proper coolant level.</p>
+      <div class="parts-list">
+        <div class="parts-list-label">Parts Replaced</div>
+        <div class="part-item">
+          <div class="part-check">✓</div>
+          Lower Radiator Hose
+        </div>
+        <div class="part-item">
+          <div class="part-check">✓</div>
+          Water Control Valve
         </div>
       </div>
     </div>
-
-    <!-- P130D -->
-    <div class="status-card">
-      <div class="status-card-header">
-        <div class="status-icon icon-amber">⚠</div>
-        <div class="status-card-title">
-          <h3>Code P130D — Engine Knock Detected</h3>
-          <p>Engine / Combustion</p>
-        </div>
-        <span class="status-pill pill-amber">Pending Repair</span>
-      </div>
-      <div class="status-card-body">
-        <p>This code means the engine's computer detected abnormal combustion — commonly referred to as "knock" or "pre-ignition" — in one of the engine cylinders. When this happens, the computer tries to compensate to protect the engine, but in this case it reached its limit and stored a fault code.</p>
-        <p>Through diagnostic testing, the root cause was identified as <strong>carbon buildup on the intake valves</strong> inside the engine. This is a known and common condition on this engine type. Over time, oily deposits accumulate on the intake valves and create hot spots that cause the fuel-air mixture to ignite at the wrong moment.</p>
-        <p>This condition is <strong>separate from the coolant leak</strong> and requires its own service to fully resolve. It is not an emergency, but it should be addressed to restore full engine performance and prevent the check engine light from returning.</p>
-      </div>
-    </div>
-
-    <div class="section-label">
-      <div class="line"></div><span>Summary &amp; Recommended Service</span><div class="line"></div>
-    </div>
-
-    <div class="summary-box">
-      <h3>What We Found &amp; What's Next</h3>
-      <p>Your 2013 Ford Escape came in with two diagnostic codes. The <strong>coolant leak has been fully repaired</strong> — the lower coolant hose, water control valve, and coolant were replaced, and the cooling system is now in good working order.</p>
-      <p>The remaining code, related to engine knock, was thoroughly diagnosed and traced to <strong>carbon deposits on the intake valves</strong> — specifically most active in Cylinder 2. This is a maintenance issue, not a breakdown risk, but it does affect performance and will keep the check engine light on until corrected.</p>
-      <div class="next-label">Recommended Next Service</div>
-      <div class="next-item">
-        <div class="next-num">1</div>
-        <span><strong style="color:#fff;">Intake Valve Carbon Cleaning</strong> — A professional cleaning procedure to remove carbon deposits from the engine's intake valves and restore normal combustion.</span>
-      </div>
-      <div class="next-item">
-        <div class="next-num">2</div>
-        <span><strong style="color:#fff;">Spark Plug Inspection</strong> — Inspect and replace spark plugs as needed, particularly Cylinder 2, to ensure clean ignition after the cleaning service.</span>
-      </div>
-    </div>
-
   </div>
 
-  <div class="footer">
-    <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; This report is provided for your records. &nbsp;·&nbsp; Questions? Contact us before authorizing any additional repairs.
-  </div>
+  <!-- P130D -->
 
-</div><!-- /panel-diag -->
-
-
-<!-- ══════════════════════════════════════
-     TAB 2 — INVOICE
-══════════════════════════════════════ -->
-<div class="tab-panel" id="panel-invoice">
-
-  <div class="vehicle-card">
-    <div class="vehicle-header">
-      <div class="vehicle-name">2013 Ford Escape</div>
-      <div class="vehicle-meta">
-        <span class="vmeta-tag">1.6L EcoBoost</span>
-        <span class="vmeta-tag">Cooling System Service</span>
-        <span class="inv-status-chip chip-due">Payment Due</span>
+  <div class="status-card">
+    <div class="status-card-header">
+      <div class="status-icon icon-amber">⚠</div>
+      <div class="status-card-title">
+        <h3>Code P130D — Engine Knock Detected</h3>
+        <p>Engine / Combustion</p>
       </div>
+      <span class="status-pill pill-amber">Pending Repair</span>
     </div>
-    <div class="vehicle-body">
-      <div class="vfield"><label>Invoice #</label><span>JJ-2026-0042</span></div>
-      <div class="vfield"><label>Date</label><span>April 23, 2026</span></div>
-      <div class="vfield"><label>VIN</label><span>1FMCU0GX7DUC61348</span></div>
-      <div class="vfield"><label>Serviced By</label><span>Jorge Vasquez</span></div>
+    <div class="status-card-body">
+      <p>This code means the engine's computer detected abnormal combustion — commonly referred to as "knock" or "pre-ignition" — in one of the engine cylinders. When this happens, the computer tries to compensate to protect the engine, but in this case it reached its limit and stored a fault code.</p>
+      <p>Through diagnostic testing, the root cause was identified as <strong>carbon buildup on the intake valves</strong> inside the engine. This is a known and common condition on this engine type. Over time, oily deposits accumulate on the intake valves and create hot spots that cause the fuel-air mixture to ignite at the wrong moment.</p>
+      <p>This condition is <strong>separate from the coolant leak</strong> and requires its own service to fully resolve. It is not an emergency, but it should be addressed to restore full engine performance and prevent the check engine light from returning.</p>
     </div>
   </div>
 
-  <div class="content">
+  <!-- SUMMARY -->
 
-    <div class="section-label">
-      <div class="line"></div><span>Customer &amp; Vehicle Details</span><div class="line"></div>
-    </div>
-    <div class="inv-info-grid">
-      <div class="inv-info-card">
-        <div class="ic-title">Bill To</div>
-        <div class="irow"><span class="ik">Name</span><span class="iv blank">—</span></div>
-        <div class="irow"><span class="ik">Address</span><span class="iv blank">—</span></div>
-        <div class="irow"><span class="ik">Phone</span><span class="iv">832-993-8115</span></div>
-        <div class="irow"><span class="ik">Email</span><span class="iv blank">N/A</span></div>
-      </div>
-      <div class="inv-info-card">
-        <div class="ic-title">Vehicle Info</div>
-        <div class="irow"><span class="ik">Year / Make</span><span class="iv">2013 Ford Escape 1.6L</span></div>
-        <div class="irow"><span class="ik">VIN</span><span class="iv">1FMCU0GX7DUC61348</span></div>
-        <div class="irow"><span class="ik">License Plate</span><span class="iv blank">—</span></div>
-        <div class="irow"><span class="ik">Mileage In</span><span class="iv">00,000 mi</span></div>
-        <div class="irow"><span class="ik">Mileage Out</span><span class="iv">00,000 mi</span></div>
-      </div>
-    </div>
-
-    <div class="section-label">
-      <div class="line"></div><span>Services &amp; Parts</span><div class="line"></div>
-    </div>
-    <div class="items-card">
-      <table class="items">
-        <thead>
-          <tr>
-            <th style="width:48%">Description</th>
-            <th>Qty</th>
-            <th>Unit Price</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="desc">Water Control Valve</td>
-            <td>1</td><td>$89.81</td><td>$89.81</td>
-          </tr>
-          <tr>
-            <td class="desc">Lower Coolant Hose</td>
-            <td>1</td><td>$167.78</td><td>$167.78</td>
-          </tr>
-          <tr>
-            <td class="desc">Coolant</td>
-            <td>2</td><td>$25.41</td><td>$50.82</td>
-          </tr>
-          <tr class="spacer"><td colspan="4"></td></tr>
-          <tr class="labor-row">
-            <td class="desc">Labor</td>
-            <td>—</td><td>$160.00</td><td>$160.00</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="totals-card">
-      <div class="t-row"><span class="tk">Subtotal</span><span class="tv">$519.23</span></div>
-      <div class="t-row"><span class="tk">Tax (6.25%)</span><span class="tv">$32.45</span></div>
-      <div class="t-row"><span class="tk">Total Amount Due</span><span class="tv">$551.68</span></div>
-    </div>
-
-    <div class="section-label">
-      <div class="line"></div><span>Notes &amp; Payment</span><div class="line"></div>
-    </div>
-    <div class="bottom-grid">
-      <div class="bottom-card">
-        <div class="bc-title">Notes</div>
-        <p>Thank you for choosing J&amp;J Texas Lone Star. Payment is due within 30 days of invoice date.</p>
-      </div>
-      <div class="bottom-card">
-        <div class="bc-title">Payment Methods</div>
-        <div class="payment-pills">
-          <span class="pay-pill">💵 Cash</span>
-          <span class="pay-pill">💳 Credit / Debit Card</span>
-        </div>
-        <p>Questions about this invoice?</p>
-        <div class="contact-val">(832) 807-0449</div>
-      </div>
-    </div>
-
+  <div class="section-label">
+    <div class="line"></div>
+    <span>Summary &amp; Recommended Service</span>
+    <div class="line"></div>
   </div>
 
-  <div class="footer">
-    <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; 10107 Crammond St, Houston TX 77064 &nbsp;·&nbsp; (832) 807-0449 &nbsp;·&nbsp; jjtexaslonestar.com
+  <div class="summary-box">
+    <h3>What We Found &amp; What's Next</h3>
+    <p>Your 2013 Ford Escape came in with two diagnostic codes. The <strong>coolant leak has been fully repaired</strong> — the lower radiator hose and water control valve were replaced, and the cooling system is now in good working order.</p>
+    <p>The remaining code, related to engine knock, was thoroughly diagnosed and traced to <strong>carbon deposits on the intake valves</strong> — specifically most active in Cylinder 2. This is a maintenance issue, not a breakdown risk, but it does affect performance and will keep the check engine light on until corrected.</p>
+    <div class="next-label">Recommended Next Service</div>
+    <div class="next-item">
+      <div class="next-num">1</div>
+      <span><strong style="color:#fff;">Intake Valve Carbon Cleaning</strong> — A professional cleaning procedure to remove carbon deposits from the engine's intake valves and restore normal combustion.</span>
+    </div>
+    <div class="next-item">
+      <div class="next-num">2</div>
+      <span><strong style="color:#fff;">Spark Plug Inspection</strong> — Inspect and replace spark plugs as needed, particularly Cylinder 2, to ensure clean ignition after the cleaning service.</span>
+    </div>
   </div>
 
-</div><!-- /panel-invoice -->
-
+  </div>
+<div class="footer">
+  <strong>J&amp;J Texas Lone Star AutoDiag</strong> &nbsp;·&nbsp; This report is provided for your records. &nbsp;·&nbsp; Questions? Contact us before authorizing any additional repairs.
+</div>
 
 <script>
+  function showReport(id, tab) {
+    const panel = document.getElementById(id);
+    const isActive = tab.classList.contains('active');
+    document.querySelectorAll('.report-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.r-tab').forEach(t => t.classList.remove('active'));
+    if (!isActive) {
+      panel.classList.add('visible');
+      tab.classList.add('active');
+    }
+  }
+
+  // Auto-fill today's date
   const d = new Date();
   const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   document.getElementById('report-date').textContent = months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
-
-  function switchTab(tab, btn) {
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById('panel-' + tab).classList.add('active');
-    btn.classList.add('active');
-  }
 </script>
 
 </body>
